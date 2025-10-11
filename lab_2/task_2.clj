@@ -1,3 +1,4 @@
+;; Сравнить каждый вызов 
 (defn integrate-lazy
   [f]
   (let [step 0.001

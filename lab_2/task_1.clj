@@ -1,3 +1,4 @@
+;; cсравнить с memoize
 (defn integrate-memoized
   [f]
   (let [step 0.001

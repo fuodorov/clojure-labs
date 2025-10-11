@@ -20,7 +20,6 @@
 (println "Result map:   " (map #(* 2 %) [1 2 3 4]))
 (println)
 
-;; Тестирование my-filter
 (println "my-filter: even")
 (println "[1 2 3 4 5 6 7 8]")
 (println "Result my-filter:" (my-filter even? [1 2 3 4 5 6 7 8]))

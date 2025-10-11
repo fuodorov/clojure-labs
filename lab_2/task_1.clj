@@ -64,8 +64,8 @@
   (println "F(10) =" (F 10.0) ", ≈" (/ 100.0 2)))
 (println)
 
-(println "Test with custom memoize:")
-(let [f (fn [x] (* x x x))
+(println "Test 2: f(x) = x^2, custom memoized")
+(let [f (fn [x] (* x x))
       F (integrate-memoized f)]
   (println "First F(100)...")
   (time (F 100.0))
@@ -77,8 +77,8 @@
   (time (F 200.0)))
 (println)
 
-(println "Test with built-in memoize:")
-(let [f (fn [x] (* x x x))
+(println "Test 3: f(x) = x^2, built-in memoize")
+(let [f (fn [x] (* x x))
       F (integrate-with-memoize f)]
   (println "First F(100)...")
   (time (F 100.0))
@@ -90,11 +90,11 @@
   (time (F 200.0)))
 (println)
 
-(println "Comparison: Custom memoization vs built-in memoize")
-(let [f (fn [x] (* x x))
+(println "Test 3: f(x) = x^3, comparison, custom memoization vs built-in memoize")
+(let [f (fn [x] (* x x x))
       F-custom (integrate-memoized f)
       F-builtin (integrate-with-memoize f)
-      test-values [10.0 20.0 30.0 10.0 20.0 30.0]]
+      test-values [10.0 20.0 30.0 10.0 20.0 30.0 10.0 20.0 30.0]]
   
   (println "\nCustom memoization:")
   (time

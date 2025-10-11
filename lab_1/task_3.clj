@@ -1,6 +1,3 @@
-;; Задача 1.3: Реализация my-map и my-filter через reduce
-;; Определяем аналоги map и filter используя только reduce и базовые операции
-
 (defn my-map
   [f coll]
   (reduce (fn [acc item]
@@ -17,24 +14,21 @@
           '()
           coll))
 
-;; Тестирование my-map
-(println "=== Задача 1.3: my-map и my-filter через reduce ===")
-
-(println "my-map: удвоение чисел")
-(println "Исходный список: [1 2 3 4]")
-(println "Результат my-map:" (my-map #(* 2 %) [1 2 3 4]))
-(println "Результат map:   " (map #(* 2 %) [1 2 3 4]))
+(println "my-map: x2")
+(println "[1 2 3 4]")
+(println "Result my-map:" (my-map #(* 2 %) [1 2 3 4]))
+(println "Result map:   " (map #(* 2 %) [1 2 3 4]))
 (println)
 
 ;; Тестирование my-filter
-(println "my-filter: чётные числа")
-(println "Исходный список: [1 2 3 4 5 6 7 8]")
-(println "Результат my-filter:" (my-filter even? [1 2 3 4 5 6 7 8]))
-(println "Результат filter:   " (filter even? [1 2 3 4 5 6 7 8]))
+(println "my-filter: even")
+(println "[1 2 3 4 5 6 7 8]")
+(println "Result my-filter:" (my-filter even? [1 2 3 4 5 6 7 8]))
+(println "Result filter:   " (filter even? [1 2 3 4 5 6 7 8]))
 (println)
 
-(println "my-filter: числа больше 5")
-(println "Исходный список: [1 3 5 7 9 11]")
-(println "Результат my-filter:" (my-filter #(> % 5) [1 3 5 7 9 11]))
-(println "Результат filter:   " (filter #(> % 5) [1 3 5 7 9 11]))
+(println "my-filter: >5")
+(println "[1 3 5 7 9 11]")
+(println "Result my-filter:" (my-filter #(> % 5) [1 3 5 7 9 11]))
+(println "Result filter:   " (filter #(> % 5) [1 3 5 7 9 11]))
 (println)

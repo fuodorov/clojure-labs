@@ -90,19 +90,13 @@
   (time (F 200.0)))
 (println)
 
-(println "Test 3: f(x) = x^3, comparison, custom memoization vs built-in memoize")
+
+(println "Test 3: f(x) = x^3, various values")
 (let [f (fn [x] (* x x x))
-      F-custom (integrate-memoized f)
-      F-builtin (integrate-with-memoize f)
-      test-values [10.0 20.0 30.0 10.0 20.0 30.0 10.0 20.0 30.0]]
-  
-  (println "\nCustom memoization:")
-  (time
-    (doseq [x test-values]
-      (F-custom x)))
-  
-  (println "\nBuilt-in memoize:")
-  (time
-    (doseq [x test-values]
-      (F-builtin x))))
+      F (integrate-with-memoize f)
+      values [5.0 10.0 15.0 20.0 25.0 30.0 35.0 40.0 45.0 50.0]]
+  (doseq [x values]
+    (print (format "F(%.1f): " x))
+    (time  (F x))))
 (println)
+

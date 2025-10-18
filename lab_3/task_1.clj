@@ -1,3 +1,16 @@
+(defn avg-time
+  "Измеряет среднее время выполнения функции f за n запусков (в миллисекундах)"
+  [n f]
+  (let [times (for [_ (range n)]
+                (let [start (System/nanoTime)
+                      result (f)
+                      end (System/nanoTime)]
+                  (/ (- end start) 1000000.0)))
+        avg (/ (reduce + times) n)]
+    (printf "Avg time (%.1f ms) over %d runs\n" avg n)
+    (flush)
+    avg))
+
 (defn split-into-blocks
   [coll block-size]
   (when (seq coll)
@@ -38,29 +51,35 @@
 
 (println "Test 3: Performance (light predicate)")
 (let [data (range 10000)
-      block-sizes [1 2 3 4 5 10 20 25 50 100]]
+      block-sizes [1 2 3 4 5 10 20 25 50 100 200 300 400 500 600 700 800 900 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000]
+      runs 100]
   (print "Simple filter: ")
-  (time (doall (filter even? data)))
+  (avg-time runs #(doall (filter even? data)))
     (doseq [bs block-sizes]
         (print (format "Parallel filter (blocks of %d): " bs))
-        (time (doall (parallel-filter even? data bs)))))
+        (avg-time runs #(doall (parallel-filter even? data bs)))))
 
 (println)
 
-(println "Test 4: Performance (prime number filtering")
+(println "Test 4: Performance (prime number filtering)")
 (defn is-prime? [n]
   (if (< n 2)
     false
     (not-any? #(zero? (mod n %)) (range 2 (inc (int (Math/sqrt n)))))))
 
 (let [data (range 1 10000)
-      block-sizes [1 2 3 4 5 10 20 25 50 100 1000 10000]]
+      block-sizes [1 2 3 4 5 10 20 25 50 100 200 300 400 500 600 700 800 900 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000]
+      runs 100]
   (print "Simple filter: ")
-  (let [result (time (doall (filter is-prime? data)))]
-    (println "Found:" (count result) "prime numbers"))
+  (avg-time runs #(let [result (doall (filter is-prime? data))]
+                     result))
 
     (doseq [bs block-sizes]
       (print (format "Parallel filter (blocks of %d): " bs))
-      (let [result (time (doall (parallel-filter is-prime? data bs)))]
-        (println "Found:" (count result) "prime numbers"))))
+      (avg-time runs #(let [result (doall (parallel-filter is-prime? data bs))]
+                         result)))
+                         
+  (print "Simple filter: ")
+  (avg-time runs #(let [result (doall (filter is-prime? data))]
+                     result)))
 (println)

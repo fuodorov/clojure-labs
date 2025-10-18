@@ -90,11 +90,10 @@
   (time (F 200.0)))
 (println)
 
-
-(println "Test 3: f(x) = x^3, various values")
+(println "Test 3: f(x) = x^3, built-in memoize, various values")
 (let [f (fn [x] (* x x x))
       F (integrate-with-memoize f)
-      values [5.0 10.0 15.0 20.0 25.0 30.0 35.0 40.0 45.0 50.0]]
+      values [0.0 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0]]
   (doseq [x values]
     (print (format "F(%.1f): " x))
     (time  (F x))))

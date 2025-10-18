@@ -54,7 +54,7 @@
     (not-any? #(zero? (mod n %)) (range 2 (inc (int (Math/sqrt n)))))))
 
 (let [data (range 1 10000)
-      block-sizes [1 2 3 4 5 10 20 25 50 100]]
+      block-sizes [1 2 3 4 5 10 20 25 50 100 1000 10000]]
   (print "Simple filter: ")
   (let [result (time (doall (filter is-prime? data)))]
     (println "Found:" (count result) "prime numbers"))
